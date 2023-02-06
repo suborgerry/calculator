@@ -1,9 +1,9 @@
 import './App.css';
 import React, { useState } from 'react';
-import styled from 'styled-components'
+import styled from 'styled-components';
+import mathFloor from './mathFloor';
 
 function App() {
-
   const [storageCount, setStorageCount] = useState(0);
   const [transferCount, setTransferCount] = useState(0);
 
@@ -22,12 +22,15 @@ function App() {
   const Provider = (props) => {
     let storage = storageCount * props.storageCoeff;
     let transfer = transferCount * props.transferCoeff;
+    let minimalPrice = props.minimalPrice ? props.minimalPrice : 1;
+    let price = mathFloor((storage + transfer));
+        price = price >= minimalPrice ? price : minimalPrice;
 
-    let price = (storage + transfer).toFixed(2);
     let count = Math.round(price * 10);
 
     return(
       <>
+        <div>{price} - {minimalPrice}</div>
         <String size={count}></String><div>${price}</div>
       </>
     )
@@ -59,11 +62,11 @@ function App() {
       <div className='strings'>
         <div>
           <p>Backblaze</p>
-          <Provider storageCoeff="0.005" transferCoeff="0.01"/>
+          <Provider storageCoeff="0.005" transferCoeff="0.01" minimalPrice="7" />
         </div>
         <div>
           <p>Vultr</p>
-          <Provider storageCoeff="0.01" transferCoeff="0.01"/>
+          <Provider storageCoeff="0.01" transferCoeff="0.01" minimalPrice="5" />
         </div>
       </div>
     </div>
