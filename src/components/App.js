@@ -92,8 +92,7 @@ function App() {
       <div className='strings'>
         <ProviderList storageCount={storageCount}
                       transferCount={transferCount}
-                      providerArr={providerArr}
-        />
+                      providerArr={providerArr}/>
       </div>
     </div>
   );
