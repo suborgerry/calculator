@@ -90,11 +90,12 @@ function App() {
     return (
       <div className="strings-item">
         <p>{name}</p>
+        <form>
+          { optionsCheck && optionsItems }
+        </form>
         <div className="strings-item__price">
-          <String size={count}></String><div>${price}</div>
-          <form>
-            { optionsCheck && optionsItems }
-          </form>
+          <String size={count}></String>
+          <div>${price}</div>
         </div>
       </div>
     )
