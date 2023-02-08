@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Provider from './Provider';
 import { Title } from './StylingCimoponents';
 
-const providerObj = [
+const providerArr = [
   {
     name: "Backblaze",
     transferCoeff: 0.01,
@@ -62,7 +62,7 @@ const providerObj = [
 
 const ProviderList = (props) => { 
   return (
-    providerObj.map((provider, index) => 
+    providerArr.map((provider, index) => 
     <Provider key={provider.name} 
               provider={provider}
               storageCount={props.storageCount}
