@@ -69,11 +69,11 @@ function App() {
     <div className="App">
       <div className='inputs'>
         <div className="inputs-item">
-          <Title>Storage: {storageCount}GB</Title>
+          <Title text={"Storage: " + storageCount + "GB"} />
           <input type="range" name="cowbell" min="0" defaultValue={0} max="1000" step="1" onChange={handleStorage}/>
         </div>
         <div className="inputs-item">
-          <Title>Transfer: {transferCount}GB</Title>
+          <Title text={"Transfer: " + transferCount + "GB"} />
           <input type="range" name="cowbell" min="0" defaultValue={0} max="1000" step="1" onChange={handleTransfer}/>
         </div>
       </div>
