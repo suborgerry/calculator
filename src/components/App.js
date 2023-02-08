@@ -32,6 +32,25 @@ const providerObj = [
     ]
   },
   {
+    name: "Scaleway",
+    transferCoeff: 0.06,
+    storageCoeff: 0.01,
+    minimalPrice: false,
+    maxPrice: 10,
+    options: [
+      {
+        name: "Multi",
+        transferCoeff: 0.06,
+        storageCoeff: 0.01
+      },
+      {
+        name: "Single",
+        transferCoeff: 0.03,
+        storageCoeff: 0.01
+      }
+    ]
+  },
+  {
     name: "Vultr",
     transferCoeff: 0.01,
     storageCoeff: 0.01,
@@ -40,6 +59,17 @@ const providerObj = [
     options: []
   }
 ];
+
+const ProviderList = (props) => { 
+  return (
+    providerObj.map((provider, index) => 
+    <Provider key={index + provider.name} 
+              provider={provider}
+              storageCount={props.storageCount}
+              transferCount={props.transferCount}
+    />)
+  )
+};
 
 function App() {
   const [storageCount, setStorageCount] = useState(0);
@@ -58,13 +88,6 @@ function App() {
     setTransferCount(count);
   }
 
-  const providerList = providerObj.map((provider, index) => 
-    <Provider key={index} 
-              provider={provider}
-              storageCount={storageCount}
-              transferCount={transferCount}/>
-  );
-
   return (
     <div className="App">
       <div className='inputs'>
@@ -78,7 +101,9 @@ function App() {
         </div>
       </div>
       <div className='strings'>
-        {providerList}
+        <ProviderList storageCount={storageCount}
+                      transferCount={transferCount}
+        />
       </div>
     </div>
   );
