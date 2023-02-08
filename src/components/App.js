@@ -1,6 +1,6 @@
 import '../styles/App.css';
 import React, { useState } from 'react';
-import Provider from './Provider';
+import ProviderList from './ProviderList';
 import { Title } from './StylingCimoponents';
 
 const providerArr = [
@@ -60,17 +60,6 @@ const providerArr = [
   }
 ];
 
-const ProviderList = (props) => { 
-  return (
-    providerArr.map((provider, index) => 
-    <Provider key={provider.name} 
-              provider={provider}
-              storageCount={props.storageCount}
-              transferCount={props.transferCount}
-    />)
-  )
-};
-
 function App() {
   const [storageCount, setStorageCount] = useState(0);
   const [transferCount, setTransferCount] = useState(0);
@@ -103,6 +92,7 @@ function App() {
       <div className='strings'>
         <ProviderList storageCount={storageCount}
                       transferCount={transferCount}
+                      providerArr={providerArr}
         />
       </div>
     </div>
