@@ -1,14 +1,30 @@
 import mathFloor from '../mathFloor';
 import { String } from './StylingCimoponents';
+import { useState } from 'react';
+
 
 const Provider = (props) => {
+    const [selectedOption, setSelectedOption] = useState(null);
     const options = props.provider.options;
     const optionsCheck = options.length > 0;
-
+    
     let storage;
     let transfer;
     let optionsItems = "";
+
+    const handleSelectedOption = (option) => {
+        setSelectedOption(option);
+    };
+
     if (optionsCheck) {
+        if(selectedOption != null) {
+            storage = props.storageCount * selectedOption.storageCoeff;
+            transfer = props.transferCount * selectedOption.transferCoeff;
+        } else {
+            storage = props.storageCount * props.provider.storageCoeff;
+            transfer = props.transferCount * props.provider.transferCoeff;
+        }
+
         optionsItems = options.map((option, index) =>
             <div key={index}>
                 <label htmlFor={option.name + index}>
@@ -17,8 +33,8 @@ const Provider = (props) => {
                         id={option.name + index}
                         type="radio"
                         value={option.name}
-                        data-transfer-coeff={option.transferCoeff}
-                        data-storage-coeff={option.storageCoeff} />
+                        defaultChecked={index === 1 ? true : false}
+                        onChange={() => { handleSelectedOption(option) }} />
                 </label>
             </div>
         )
@@ -26,6 +42,8 @@ const Provider = (props) => {
         storage = props.storageCount * props.provider.storageCoeff;
         transfer = props.transferCount * props.provider.transferCoeff;
     }
+
+    // console.log(storage, transfer);
 
     const name = props.provider.name;
 

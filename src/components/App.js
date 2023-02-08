@@ -15,7 +15,7 @@ const providerObj = [
   {
     name: "Bunny",
     transferCoeff: 0.01,
-    storageCoeff: 0.005,
+    storageCoeff: 0.01,
     minimalPrice: false,
     maxPrice: 10,
     options: [
@@ -63,7 +63,7 @@ function App() {
               provider={provider}
               storageCount={storageCount}
               transferCount={transferCount}/>
-    );
+  );
 
   return (
     <div className="App">
