@@ -26,7 +26,7 @@ const Provider = (props) => {
         }
 
         optionsItems = options.map((option, index) =>
-            <div key={index + option.name}>
+            <div key={option.name}>
                 <label htmlFor={option.name + index}>
                     {option.name}
                     <input name={option}

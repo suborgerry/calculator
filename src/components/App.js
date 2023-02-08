@@ -63,7 +63,7 @@ const providerObj = [
 const ProviderList = (props) => { 
   return (
     providerObj.map((provider, index) => 
-    <Provider key={index + provider.name} 
+    <Provider key={provider.name} 
               provider={provider}
               storageCount={props.storageCount}
               transferCount={props.transferCount}
