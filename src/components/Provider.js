@@ -2,12 +2,12 @@ import mathFloor from '../mathFloor';
 import { String } from './StylingCimoponents';
 import { useState } from 'react';
 
-
 const Provider = (props) => {
     const [selectedOption, setSelectedOption] = useState(null);
     const options = props.provider.options;
     const optionsCheck = options.length > 0;
-    
+    const name = props.provider.name;
+
     let storage;
     let transfer;
     let optionsItems = "";
@@ -26,14 +26,14 @@ const Provider = (props) => {
         }
 
         optionsItems = options.map((option, index) =>
-            <div key={index}>
+            <div key={index + option.name}>
                 <label htmlFor={option.name + index}>
                     {option.name}
                     <input name={option}
                         id={option.name + index}
                         type="radio"
                         value={option.name}
-                        defaultChecked={index === 1 ? true : false}
+                        defaultChecked={index === 0 ? true : false}
                         onChange={() => { handleSelectedOption(option) }} />
                 </label>
             </div>
@@ -43,14 +43,9 @@ const Provider = (props) => {
         transfer = props.transferCount * props.provider.transferCoeff;
     }
 
-    // console.log(storage, transfer);
-
-    const name = props.provider.name;
-
     const minimalPrice = props.provider.minimalPrice ? props.provider.minimalPrice : 1;
-
     let price = mathFloor((storage + transfer));
-    price = price >= minimalPrice ? price : minimalPrice;
+        price = price >= minimalPrice ? price : minimalPrice;
     const count = Math.round(price * 10);
 
     return (
