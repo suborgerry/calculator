@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const String = (props) => {
     const Div = styled.div`
-        width: ${props.size}px;
+        width: ${ props.size / 10 }%;
         height: 20px;
         background: #acaaaa
     `;
