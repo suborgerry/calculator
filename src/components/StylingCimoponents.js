@@ -16,7 +16,6 @@ const Title = (props) => {
     const H1 = styled.h1`
         font-size: 1em;
     `
-    console.log(this);
     return (
         <H1>{props.text}</H1>
     );
