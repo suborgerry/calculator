@@ -2,7 +2,7 @@ import Provider from './Provider';
 
 const ProviderList = (props) => { 
     return (
-        props.providerArr.map((provider, index) => 
+        props.providerArr.map((provider) => 
         <Provider key={provider.name} 
                 provider={provider}
                 storageCount={props.storageCount}

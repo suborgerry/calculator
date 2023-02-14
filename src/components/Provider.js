@@ -1,49 +1,31 @@
 import mathFloor from '../mathFloor';
 import { String } from './StylingCimoponents';
-import { useState } from 'react';
+import { Options, optionSelected } from './Options';
 
 const Provider = (props) => {
-    const [selectedOption, setSelectedOption] = useState(null);
-    const options = props.provider.options;
-    const optionsCheck = options.length > 0;
+    const optionsData = props.provider.options;
     const name = props.provider.name;
+    const freeUpTransfer = props.provider.freeUpTransfer;
+    const freeUpStorage = props.provider.freeUpStorage;
+    
+    const coeff = (coef, count, freeUp) => {
+        let coefReturn = count > freeUp ? coef * count : 0;
+
+        return coefReturn;
+    };
 
     let storage;
     let transfer;
-    let optionsItems = "";
 
-    const handleSelectedOption = (option) => {
-        setSelectedOption(option);
-    };
-
-    if (optionsCheck) {
-        if(selectedOption != null) {
-            storage = props.storageCount * selectedOption.storageCoeff;
-            transfer = props.transferCount * selectedOption.transferCoeff;
-        } else {
-            storage = props.storageCount * props.provider.storageCoeff;
-            transfer = props.transferCount * props.provider.transferCoeff;
-        }
-
-        optionsItems = options.map((option, index) =>
-            <div key={option.name}>
-                <label htmlFor={option.name + index}>
-                    {option.name}
-                    <input name={option}
-                        id={option.name + index}
-                        type="radio"
-                        value={option.name}
-                        defaultChecked={index === 0 ? true : false}
-                        onChange={() => { handleSelectedOption(option) }} />
-                </label>
-            </div>
-        )
+    if(optionSelected) {
+        storage = coeff(optionSelected.storageCoeff, props.storageCount, freeUpStorage);
+        transfer = coeff(optionSelected.transferCoeff, props.transferCount, freeUpTransfer);
     } else {
-        storage = props.storageCount * props.provider.storageCoeff;
-        transfer = props.transferCount * props.provider.transferCoeff;
+        storage = coeff(props.provider.storageCoeff, props.storageCount, freeUpStorage);
+        transfer = coeff(props.provider.transferCoeff, props.transferCount, freeUpTransfer);
     }
 
-    const minimalPrice = props.provider.minimalPrice ? props.provider.minimalPrice : 1;
+    const minimalPrice = props.provider.minimalPrice !== undefined ? props.provider.minimalPrice : 1;
     let price = mathFloor((storage + transfer));
         price = price >= minimalPrice ? price : minimalPrice;
     const count = Math.round(price * 10);
@@ -51,9 +33,7 @@ const Provider = (props) => {
     return (
         <div className="strings-item">
             <p>{name}</p>
-            <form>
-                {optionsCheck && optionsItems}
-            </form>
+            { optionsData && <Options optionsData={optionsData}/> }
             <div className="strings-item__price">
                 <String size={count}></String>
                 <div>${price}</div>
