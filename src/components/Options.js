@@ -1,29 +1,15 @@
-import { useState } from 'react';
-
-let optionSelected;
-
 const Options = (props) => {
-    const [selectedOption, setSelectedOption] = useState(null);
-    const optionsData = props.optionsData;
-
-    const handleSelectedOption = (option) => {
-        setSelectedOption(option);
-    
-        option = selectedOption;
-    };
-
-    const optionsList = optionsData.map((option, index) =>
-    <div key={option.name}>
-        <label htmlFor={option.name + index}>
+    const optionsList = props.optionsData.map((option, index) =>
+        <label htmlFor={option.name + index} key={option.name}>
             {option.name}
             <input name={option}
                 id={option.name + index}
                 type="radio"
                 value={option.name}
                 defaultChecked={index === 0 ? true : false}
-                onChange={() => { handleSelectedOption(option) }} />
+                onChange={() => { props.onCheck(option) }}
+                />
         </label>
-    </div>
     );
 
     return (
@@ -33,4 +19,4 @@ const Options = (props) => {
     )
 }
 
-export { Options, optionSelected };
+export default Options;

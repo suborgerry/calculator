@@ -1,14 +1,11 @@
 import '../styles/App.css';
 import React, { useState } from 'react';
 import ProviderList from './ProviderList';
-import { Title } from './StylingCimoponents';
 import providerArr from '../providerArray';
 
 function App() {
   const [storageCount, setStorageCount] = useState(0);
   const [transferCount, setTransferCount] = useState(0);
-
-  // Components
 
   // Handle functions
   const handleStorage = e => {
@@ -25,11 +22,11 @@ function App() {
     <div className="App">
       <div className='inputs'>
         <div className="inputs-item">
-          <Title text={"Storage: " + storageCount + "GB"} />
+          <h3>{"Storage: " + storageCount + "GB"}</h3>
           <input type="range" name="cowbell" min="0" defaultValue={0} max="1000" step="1" onChange={handleStorage}/>
         </div>
         <div className="inputs-item">
-          <Title text={"Transfer: " + transferCount + "GB"} />
+          <h3>{"Transfer: " + transferCount + "GB"}</h3>
           <input type="range" name="cowbell" min="0" defaultValue={0} max="1000" step="1" onChange={handleTransfer}/>
         </div>
       </div>

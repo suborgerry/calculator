@@ -9,7 +9,7 @@ const providerArr = () => {
                 maxPrice: null,
                 freeUpTransfer: 0,
                 freeUpStorage: 0,
-                options: []
+                options: null
             },
             {
                 name: "Bunny",
@@ -61,7 +61,7 @@ const providerArr = () => {
                 maxPrice: null,
                 freeUpTransfer: 0,
                 freeUpStorage: 0,
-                options: []
+                options: null
             }
         ]
     )
