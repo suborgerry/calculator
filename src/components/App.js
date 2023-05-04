@@ -10,12 +10,12 @@ function App() {
   // Handle functions
   const handleStorage = e => {
     let count = e.target.value;
-    setStorageCount(count);
+    setStorageCount(Number(count));
   }
 
   const handleTransfer = e => {
     let count = e.target.value;
-    setTransferCount(count);
+    setTransferCount(Number(count));
   }
 
   return (
@@ -23,17 +23,18 @@ function App() {
       <div className='inputs'>
         <div className="inputs-item">
           <h3>{"Storage: " + storageCount + "GB"}</h3>
-          <input type="range" name="cowbell" min="0" defaultValue={0} max="1000" step="1" onChange={handleStorage}/>
+          <input type="range" name="cowbell" min="0" defaultValue={0} max="1000" step="1" onChange={handleStorage} />
         </div>
         <div className="inputs-item">
           <h3>{"Transfer: " + transferCount + "GB"}</h3>
-          <input type="range" name="cowbell" min="0" defaultValue={0} max="1000" step="1" onChange={handleTransfer}/>
+          <input type="range" name="cowbell" min="0" defaultValue={0} max="1000" step="1" onChange={handleTransfer} />
         </div>
       </div>
       <div className='strings'>
-        <ProviderList storageCount={storageCount}
-                      transferCount={transferCount}
-                      providerArr={providerArr()}/>
+        <ProviderList
+          storageCount={storageCount}
+          transferCount={transferCount}
+          providerArr={providerArr()} />
       </div>
     </div>
   );

@@ -1,28 +1,26 @@
-import { useState } from 'react';
 import Options from './Options';
 import Price from './Price';
 
 const Provider = (props) => {
     const optionsData = props.provider.options;
     const name = props.provider.name;
-    const [optionSelected, setOptionSelected] = useState(null);
-
+    const { selectedOption, onOptionSelect, isMin } = props;
+    
     const checkOption = (option) => {
-        setOptionSelected(option)
+        onOptionSelect(name, option.name)
     };
 
     return (
         <div className="strings-item">
             <div className="strings-item__name_option">
                 <p>{name}</p>
-                { optionsData && <Options optionsData={optionsData} onCheck={checkOption}/> }
+                { optionsData && <Options optionsData={optionsData} selectedOption={selectedOption} onCheck={checkOption}/> }
             </div>
             <div className="strings-item__price">
                 <Price 
-                    data={props}
-                    optionSelected={optionSelected}
-                    checkColor={props.checkColor}
-                    minPrice={props.minPrice} />
+                    data={props.provider}
+                    isMin={isMin}
+                />
             </div>
         </div>
     )

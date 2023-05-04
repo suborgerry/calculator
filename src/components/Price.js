@@ -1,19 +1,8 @@
-import mathFloor from '../mathFloor';
+// import { useRef } from 'react';
+// import mathFloor from '../mathFloor';
 
-const Price = (props) => {
-    const freeUpTransfer = props.data.provider.freeUpTransfer;
-    const freeUpStorage = props.data.provider.freeUpStorage;
-    const minimalPrice = props.data.provider.minimalPrice !== undefined ? props.data.provider.minimalPrice : 1;
-    const maxPrice = props.data.provider.maxPrice !== null ? props.data.provider.maxPrice : false;
-
-    let storage;
-    let transfer;
-
-    const coeff = (coef, count, freeUp) => {
-        let coefReturn = count > freeUp ? coef * count : 0;
-
-        return coefReturn;
-    };
+const Price = ({ data, isMin }) => {
+    const { calculatedPrice } = data;
 
     const style = (count) => {
         let styleObj;
@@ -30,27 +19,14 @@ const Price = (props) => {
         return styleObj;
     };
 
-    if(props.optionSelected) {
-        storage = coeff(props.optionSelected.storageCoeff, props.data.storageCount, freeUpStorage);
-        transfer = coeff(props.optionSelected.transferCoeff, props.data.transferCount, freeUpTransfer);
-    } else {
-        storage = coeff(props.data.provider.storageCoeff, props.data.storageCount, freeUpStorage);
-        transfer = coeff(props.data.provider.transferCoeff, props.data.transferCount, freeUpTransfer);
-    }
-
-    let price = mathFloor((storage + transfer));
-    price = price >= minimalPrice ? price : minimalPrice; // check minimal price
-    if(maxPrice) { price = price <= maxPrice ? price : maxPrice };
-
-    const count = Math.round(price * 10);
-    const isMinPrice = props.checkColor(price);
+    const count = calculatedPrice * 10;
 
     return (
         <>
         <div
-            className={`string ${isMinPrice ? "min-price" : "max-price"}`}
+            className={`string ${isMin ? "min-price" : "max-price"}`}
             style={style(count)}></div>
-        <div>{price}$</div>
+        <div>{calculatedPrice}$</div>
         </>
     );
 }
